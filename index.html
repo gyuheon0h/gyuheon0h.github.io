@@ -78,9 +78,26 @@
           </li>
         </ul>
       </section>
+      <div id="clock" class="clock"></div>
     </div>
     <script src="javascripts/scale.fix.js"></script>
+    <script>
+      function updateClock() {
+        var now = new Date();
+        var utc = now.getTime() + (now.getTimezoneOffset() * 60000);
+        var pst = new Date(utc + (3600000 * -8));
+
+        var hours = pst.getHours();
+        var minutes = pst.getMinutes();
+        var seconds = pst.getSeconds();
+        minutes = minutes < 10 ? '0' + minutes : minutes;
+        seconds = seconds < 10 ? '0' + seconds : seconds;
+
+        var timeString = "Current time in San Francisco is " + hours + ':' + minutes + ':' + seconds;
+        document.getElementById('clock').innerHTML = timeString;
+        setTimeout(updateClock, 1000);
+      }
+      updateClock(); // Initial call to update clock
+    </script>
   </body>
-</html>
-</html>
 </html>
