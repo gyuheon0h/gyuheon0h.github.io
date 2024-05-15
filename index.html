@@ -84,17 +84,10 @@
     <script>
       function updateClock() {
         var now = new Date();
-        var utc = now.getTime() + (now.getTimezoneOffset() * 60000);
-        var pst = new Date(utc + (3600000 * -8));
-
-        var hours = pst.getHours();
-        var minutes = pst.getMinutes();
-        var seconds = pst.getSeconds();
-        minutes = minutes < 10 ? '0' + minutes : minutes;
-        seconds = seconds < 10 ? '0' + seconds : seconds;
-
-        var timeString = "Current time in San Francisco is " + hours + ':' + minutes + ':' + seconds;
-        document.getElementById('clock').innerHTML = timeString;
+        var options = { timeZone: 'America/Los_Angeles', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false };
+        var timeString = new Intl.DateTimeFormat('en-US', options).format(now);
+        
+        document.getElementById('clock').innerHTML = "Current time in San Francisco is " + timeString;
         setTimeout(updateClock, 1000);
       }
       updateClock(); // Initial call to update clock
