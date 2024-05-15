@@ -86,6 +86,9 @@
         var now = new Date();
         var options = { timeZone: 'America/Los_Angeles', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true };
         var timeString = new Intl.DateTimeFormat('en-US', options).format(now);
+        if (timeString[0] == "0") {
+          timeString = timeString.slice(1);
+        }
         
         document.getElementById('clock').innerHTML = timeString + " • San Francisco, CA";
         setTimeout(updateClock, 1000);
